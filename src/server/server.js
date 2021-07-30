@@ -30,8 +30,9 @@ app.get('/', function (req, res) {
 
 
 app.get('/getData', async (req, res) => {
-    const cityData = await getCityDetails("bath", "england")
-    console.log(cityData.lng)
+    const cityData = await getCityDetails("bath", "england");
+    const date = new Date('2021-11-02');
+    console.log(cityData.lng);
 });
 
 // designates what port the app will listen to for incoming requests
@@ -55,3 +56,16 @@ const getCityDetails = async (city, country) => {
     }
 }
 
+
+
+const isWithinWeek = (date) => {
+    const now = new Date();
+    let endOfWeek = new Date()
+    endOfWeek.setDate(endOfWeek.getDate() + 7);
+    if (date > now && date < endOfWeek) {
+        return true
+    }
+    else {
+        return false
+    }
+}
