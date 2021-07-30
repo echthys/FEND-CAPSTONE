@@ -57,7 +57,7 @@ const getCityDetails = async (city, country) => {
 }
 
 
-
+// Checks if holiday is within week
 const isWithinWeek = (date) => {
     const now = new Date();
     let endOfWeek = new Date()
@@ -68,4 +68,12 @@ const isWithinWeek = (date) => {
     else {
         return false
     }
+}
+
+// Gets days until holiday
+const daysUntil = (date) => {
+    const holidayDay = Math.ceil((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+    const now = new Date();
+    const currentDay = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+    return holidayDay - currentDay
 }
