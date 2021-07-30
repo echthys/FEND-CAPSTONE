@@ -29,11 +29,11 @@ app.get('/', function (req, res) {
 })
 
 
-app.get('/getData', async (req, res) => {
+app.post('/getData', async (req, res) => {
     const data = {}
-    const city = "istanbul"
-    const country = "turkey"
-    const date = new Date("08-30-21")
+    const city = req.body.city
+    const country = req.body.country
+    const date = new Date(req.body.date)
     const cityData = await getCityDetails(city, country);
     if (cityData) {
         if (isWithinWeek(date)) {
@@ -55,6 +55,11 @@ app.get('/getData', async (req, res) => {
     }
 
 });
+
+
+// app.post("/postTest", async (req, res) => {
+//     console.log(req.body.city)
+// })
 
 // designates what port the app will listen to for incoming requests
 app.listen(8080, function () {
@@ -144,3 +149,5 @@ const daysUntil = (date) => {
     const currentDay = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
     return holidayDay - currentDay
 }
+
+
