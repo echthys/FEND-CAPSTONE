@@ -1,0 +1,56 @@
+var path = require('path')
+const express = require('express')
+const dotenv = require('dotenv');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+// To use fecth in node...
+const fetch = require('node-fetch');
+// Env Variables.
+dotenv.config();
+
+
+const app = express()
+
+// For JSON
+app.use(cors());
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+app.use(bodyParser.json());
+
+// Folder to find files
+app.use(express.static('dist'))
+
+console.log(__dirname)
+
+app.get('/', function (req, res) {
+    res.sendFile('dist/index.html')
+})
+
+// designates what port the app will listen to for incoming requests
+app.listen(8080, function () {
+    console.log('Example app listening on port 8080!')
+})
+
+app.get('/test', function (req, res) {
+    res.send(mockAPIResponse)
+})
+
+const api_key = process.env.API_KEY;
+
+// app.post('/url', async (req, res) => {
+//     console.log('URL:', req.body.url)
+//     const response = await fetch(`https://api.meaningcloud.com/sentiment-2.1?key=${api_key}&url=${req.body.url}&lang=en`);
+//     try {
+//         const data = await response.json();
+//         console.log(data.model);
+//         res.send(data);
+//     } catch (error) {
+//         console.log("error", error);
+//     }
+// });
+
+const getCoordinates = (city, country) => {
+    
+}
+
