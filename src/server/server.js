@@ -31,8 +31,8 @@ app.get('/', function (req, res) {
 
 app.get('/getData', async (req, res) => {
     const cityData = await getCityDetails("bath", "england");
-    const date = new Date('2021-11-02');
-    console.log(cityData.lng);
+    const cityWeather = await getForecastedWeather(cityData.lat, cityData.lng)
+    console.log(cityWeather)
 });
 
 // designates what port the app will listen to for incoming requests
@@ -54,6 +54,24 @@ const getCityDetails = async (city, country) => {
     else {
         return false
     }
+}
+
+
+const getForecastedWeather = async (lat, lng) => {
+    const weatherAPI = process.env.WEATHER
+    const response = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${lng}&key=${weatherAPI}&units=M`)
+    const weather = await response.json()
+    const firstThree = weather.data.splice(0, 3)
+    const forecast = {}
+    for (const day of firstThree) {
+        forecast[day.valid_date] = {
+            date: day.valid_date,
+            high_temp: day.high_temp,
+            low_temp: day.low_temp,
+            decription: day.weather.description
+        }
+    }
+    return forecast
 }
 
 
