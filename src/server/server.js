@@ -22,35 +22,36 @@ app.use(bodyParser.json());
 app.use(express.static('dist'))
 
 console.log(__dirname)
+// Get Requests
 
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
 })
 
+
+app.get('/getData', async (req, res) => {
+    const cityData = await getCityDetails("bath", "england")
+    console.log(cityData.lng)
+});
+
 // designates what port the app will listen to for incoming requests
 app.listen(8080, function () {
-    console.log('Example app listening on port 8080!')
+    console.log('Server Listening on port 8080')
 })
 
-app.get('/test', function (req, res) {
-    res.send(mockAPIResponse)
-})
 
-const api_key = process.env.API_KEY;
+// Geo Name for api call
+const geo = process.env.GEONAME;
 
-// app.post('/url', async (req, res) => {
-//     console.log('URL:', req.body.url)
-//     const response = await fetch(`https://api.meaningcloud.com/sentiment-2.1?key=${api_key}&url=${req.body.url}&lang=en`);
-//     try {
-//         const data = await response.json();
-//         console.log(data.model);
-//         res.send(data);
-//     } catch (error) {
-//         console.log("error", error);
-//     }
-// });
-
-const getCoordinates = (city, country) => {
-    
+// Calls the geoName api and returns data on the city.
+const getCityDetails = async (city, country) => {
+    const response = await fetch(`http://api.geonames.org/searchJSON?q=${city}&countryName=${country}&maxRows=1&username=${geo}`)
+    const details = await response.json()
+    if (details.totalResultsCount > 0) {
+        return { lng: details.geonames[0].lng, lat: details.geonames[0].lat }
+    }
+    else {
+        return false
+    }
 }
 
