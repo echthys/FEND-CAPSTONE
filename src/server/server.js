@@ -30,14 +30,25 @@ app.get('/', function (req, res) {
 
 
 app.get('/getData', async (req, res) => {
-    const city = "trowbridge"
-    const country = "united kingdom"
+    const data = {}
+    const city = "istanbul"
+    const country = "turkey"
+    const date = new Date("08-30-21")
     const cityData = await getCityDetails(city, country);
     if (cityData) {
-        // const cityWeather = await getForecastedWeather(cityData.lat, cityData.lng)
-        const cityWeather = await getCurrentWeather(cityData.lat, cityData.lng)
+        if (isWithinWeek(date)) {
+            const cityWeather = await getCurrentWeather(cityData.lat, cityData.lng)
+            data["weather"] = cityWeather
+        }
+        else {
+            const cityWeather = await getForecastedWeather(cityData.lat, cityData.lng)
+            data["weather"] = cityWeather
+        }
         const imageUrl = await getImage(city, country)
-        console.log(imageUrl)
+        data["image"] = imageUrl
+        data["until"] = daysUntil(date)
+        console.log(data)
+        res.send(data)
     }
     else {
         console.log("Could not find city");
