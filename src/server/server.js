@@ -30,13 +30,14 @@ app.get('/', function (req, res) {
 
 
 app.get('/getData', async (req, res) => {
-    const city = "paris"
-    const country = "france"
+    const city = "trowbridge"
+    const country = "united kingdom"
     const cityData = await getCityDetails(city, country);
     if (cityData) {
         // const cityWeather = await getForecastedWeather(cityData.lat, cityData.lng)
         const cityWeather = await getCurrentWeather(cityData.lat, cityData.lng)
-        console.log(cityWeather)
+        const imageUrl = await getImage(city, country)
+        console.log(imageUrl)
     }
     else {
         console.log("Could not find city");
@@ -65,7 +66,7 @@ const getCityDetails = async (city, country) => {
     }
 }
 
-
+// Get Forecasted Weather
 const getForecastedWeather = async (lat, lng) => {
     const weatherAPI = process.env.WEATHER
     const response = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${lng}&key=${weatherAPI}&units=M`)
@@ -82,7 +83,7 @@ const getForecastedWeather = async (lat, lng) => {
     return forecast
 }
 
-
+// Get Current Weather
 const getCurrentWeather = async (lat, lng) => {
     const weatherAPI = process.env.WEATHER
     const response = await fetch(`https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lng}&key=${weatherAPI}&units=M`)
@@ -91,8 +92,26 @@ const getCurrentWeather = async (lat, lng) => {
     return forecast
 }
 
+//Get Image of provided place name
+const getImage = async (placeName, country) => {
 
+    const pix = process.env.PIX
+    const response = await fetch(`https://pixabay.com/api/?key=${pix}&q=${placeName}+${country}&image_type=photo`)
+    const image = await response.json()
+    if (image.total > 0) {
+        return image.hits[0].webformatURL
+    }
+    else {
 
+        try {
+            const response = await fetch(`https://pixabay.com/api/?key=${pix}&q=${country}&image_type=photo`)
+            const image = await response.json()
+            return image.hits[0].webformatURL
+        } catch (error) {
+            console.log("No image found")
+        }
+    }
+}
 
 // Checks if holiday is within week
 const isWithinWeek = (date) => {
