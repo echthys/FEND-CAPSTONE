@@ -30,9 +30,18 @@ app.get('/', function (req, res) {
 
 
 app.get('/getData', async (req, res) => {
-    const cityData = await getCityDetails("bath", "england");
-    const cityWeather = await getForecastedWeather(cityData.lat, cityData.lng)
-    console.log(cityWeather)
+    const city = "paris"
+    const country = "france"
+    const cityData = await getCityDetails(city, country);
+    if (cityData) {
+        // const cityWeather = await getForecastedWeather(cityData.lat, cityData.lng)
+        const cityWeather = await getCurrentWeather(cityData.lat, cityData.lng)
+        console.log(cityWeather)
+    }
+    else {
+        console.log("Could not find city");
+    }
+
 });
 
 // designates what port the app will listen to for incoming requests
@@ -66,13 +75,23 @@ const getForecastedWeather = async (lat, lng) => {
     for (const day of firstThree) {
         forecast[day.valid_date] = {
             date: day.valid_date,
-            high_temp: day.high_temp,
-            low_temp: day.low_temp,
+            temp: day.temp,
             decription: day.weather.description
         }
     }
     return forecast
 }
+
+
+const getCurrentWeather = async (lat, lng) => {
+    const weatherAPI = process.env.WEATHER
+    const response = await fetch(`https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lng}&key=${weatherAPI}&units=M`)
+    const weather = await response.json()
+    const forecast = { temp: weather.data[0].temp, description: weather.data[0].weather.description }
+    return forecast
+}
+
+
 
 
 // Checks if holiday is within week
