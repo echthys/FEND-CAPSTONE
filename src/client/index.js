@@ -3,39 +3,36 @@
 import { getHolidayData } from './js/holidayData'
 import { postReq } from './js/post'
 import { setDate } from './js/setDate'
+import { resetResults } from './js/resetResults'
+import { updateSingleDay } from './js/updateSingle'
+import { updateMultipleDays } from './js/updateMulti'
+import { appendImage } from './js/appendImage'
+
 
 // SASS Imports 
 
 import './styles/styles.scss'
-
+import './styles/results.scss'
+import './styles/info.scss'
 
 document.getElementById("generate").addEventListener("click", async () => {
-
-    const temp = document.getElementById("weatherTemp")
-    const desc = document.getElementById("weatherDesc")
-    const days = document.getElementById("days")
-
-    const localImage = document.getElementById("image")
-    if (localImage) {
-        localImage.remove()
-    }
     const data = getHolidayData()
-    const response = await postReq("http://localhost:8080/getData", data)
-    if (response.weather.temp) {
-        temp.innerText = response.weather.temp
-        desc.innerText = response.weather.description
-        days.innerText = response.until
+    if (data) {
+        const response = await postReq("http://localhost:8080/getData", data)
+        if (response.weather.temp) {
+            resetResults()
+            updateSingleDay(response.weather.temp, response.weather.description, response.until)
+            appendImage(response)
+        }
+        else {
+            resetResults()
+            updateMultipleDays(response)
+            appendImage(response)
+        }
     }
-    else {
-        
-
-    }
-    const image = document.createElement("img")
-    image.setAttribute("src", response.image)
-    image.setAttribute("id", "image")
-    document.getElementsByClassName("data")[0].appendChild(image)
 
 })
 
+// Sets the min date value on calendar 
 setDate()
 
