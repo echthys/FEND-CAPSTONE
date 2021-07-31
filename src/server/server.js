@@ -62,9 +62,9 @@ app.post('/getData', async (req, res) => {
 // })
 
 // designates what port the app will listen to for incoming requests
-app.listen(8080, function () {
-    console.log('Server Listening on port 8080')
-})
+// app.listen(8080, function () {
+//     console.log('Server Listening on port 8080')
+// })
 
 
 // Geo Name for api call
@@ -151,3 +151,9 @@ const daysUntil = (date) => {
 }
 
 
+app.get('/test', async (req, res) => {
+    res.json({ message: 'pass!' })
+})
+
+
+module.exports = app

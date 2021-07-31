@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node src/server/server.js",
+    "start": "node src/server/start.js",
     "build-prod": "webpack --config webpack.prod.js",
     "run-dev": "webpack-dev-server  --config webpack.dev.js --open",
     "build-dev": "webpack --config webpack.dev.js",
     "get-mod": "webpack --config webpack.dev.js --display-modules",
-    "test": "jest"
+    "test": "jest",
+    "supertest": "supertest"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,7 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "node-fetch": "^2.6.1",
+    "regenerator-runtime": "^0.13.9",
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.5"
   },
@@ -36,6 +38,7 @@
     "optimize-css-assets-webpack-plugin": "^6.0.1",
     "sass-loader": "^10.1.1",
     "style-loader": "^2.0.0",
+    "supertest": "^6.1.4",
     "terser-webpack-plugin": "^5.1.4",
     "webpack-dev-server": "^3.11.2",
     "workbox-webpack-plugin": "^6.1.5"
