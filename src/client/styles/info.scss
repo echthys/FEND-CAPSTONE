@@ -12,7 +12,25 @@
     grid-area: heading;
 }
 
-.info button{
+#generate {
+    grid-area: button;
+    width: 30%;
+    background-color: green;
+    color: honeydew;
+    justify-self: left;
+    margin: 2%;
+}
+
+#save {
+    grid-area: button;
+    width: 30%;
+    background-color: green;
+    color: honeydew;
+    justify-self: right;
+    margin: 2%;
+}
+
+#getTrip{
     grid-area: button;
     width: 30%;
     background-color: green;
