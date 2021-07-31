@@ -93,7 +93,7 @@ const getForecastedWeather = async (lat, lng) => {
         forecast[day.valid_date] = {
             date: day.valid_date,
             temp: day.temp,
-            decription: day.weather.description
+            description: day.weather.description
         }
     }
     return forecast

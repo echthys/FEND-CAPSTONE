@@ -9,29 +9,32 @@
 </head>
 
 <body>
-    <h1>Weather App</h1>
+    <h1 class="center">Weather App</h1>
 
     <div id="app">
         <section>
-            <div class="">
-                <h2>Where will you be going?</h2>
-                <input type="text" id="city" placeholder="Enter city here">
-                <input type="text" id="country" placeholder="Enter country here">
-                <input id="date" type="date">
-                <button id="generate" type="submit">Get Holiday Data</button>
+            <div class="info">
+                <h2 class="center">Where and when will you be going?</h2>
+                <div class="dataInput">
+                    <input type=" text" id="city" placeholder="Enter city here">
+                    <input type="text" id="country" placeholder="Enter country here">
+                    <input id="date" type="date">
+                </div>
+
+                <button id="generate" class="center" type="submit">Get Holiday Data</button>
+
             </div>
+
 
         </section>
 
         <section>
             <div class="data hidden">
-                <h2>Holiday Details</h2>
-                <ul id="results">
-                   <p></p>
-                </ul>
+                <div id="results">
 
-                <img src="" alt="">
-                
+
+                </div>
+
             </div>
         </section>
 
