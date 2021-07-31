@@ -7,6 +7,9 @@ import { resetResults } from './js/resetResults'
 import { updateSingleDay } from './js/updateSingle'
 import { updateMultipleDays } from './js/updateMulti'
 import { appendImage } from './js/appendImage'
+import { resetSaved } from './js/resetSaved'
+import { getSavedHoliday } from './js/getSavedHoliday'
+import { saveHoliday } from './js/saveHoliday'
 
 
 // SASS Imports 
@@ -14,6 +17,8 @@ import { appendImage } from './js/appendImage'
 import './styles/styles.scss'
 import './styles/results.scss'
 import './styles/info.scss'
+import './styles/saved.scss'
+
 
 document.getElementById("generate").addEventListener("click", async () => {
     const data = getHolidayData()
@@ -31,6 +36,17 @@ document.getElementById("generate").addEventListener("click", async () => {
         }
     }
 
+})
+
+// Event Listener for Saving holiday
+document.getElementById("save").addEventListener("click", () => {
+    saveHoliday()
+})
+
+
+document.getElementById("getTrip").addEventListener("click", () => {
+    resetSaved()
+    getSavedHoliday()
 })
 
 // Sets the min date value on calendar 
