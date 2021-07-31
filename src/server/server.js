@@ -29,6 +29,9 @@ app.get('/', function (req, res) {
 })
 
 
+/**
+* @description Get Data from APIs
+*/
 app.post('/getData', async (req, res) => {
     const data = {}
     const city = req.body.city
@@ -56,14 +59,19 @@ app.post('/getData', async (req, res) => {
 
 });
 
-
+// For stroring data
 postData = {}
 
+/**
+* @description Dsve trip data
+*/
 app.post("/saveTrip", (req, res) => {
     postData = req.body
 })
 
-
+/**
+* @description Get saved trip data
+*/
 app.get('/getSavedTrip', (req, res) => {
     res.send(JSON.stringify(postData))
 })
@@ -71,7 +79,9 @@ app.get('/getSavedTrip', (req, res) => {
 // Geo Name for api call
 const geo = process.env.GEONAME;
 
-// Calls the geoName api and returns data on the city.
+/**
+* @description Calls the geoName api and returns data on the city.
+*/
 const getCityDetails = async (city, country) => {
     const response = await fetch(`http://api.geonames.org/searchJSON?q=${city}&countryName=${country}&maxRows=1&username=${geo}`)
     const details = await response.json()
@@ -83,7 +93,9 @@ const getCityDetails = async (city, country) => {
     }
 }
 
-// Get Forecasted Weather
+/**
+* @description Calls the weatherBut api and returns forecast for the city.
+*/
 const getForecastedWeather = async (lat, lng) => {
     const weatherAPI = process.env.WEATHER
     const response = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${lng}&key=${weatherAPI}&units=M`)
@@ -100,7 +112,9 @@ const getForecastedWeather = async (lat, lng) => {
     return forecast
 }
 
-// Get Current Weather
+/**
+* @description Calls the weatheBut api and returns current weather for the city.
+*/
 const getCurrentWeather = async (lat, lng) => {
     const weatherAPI = process.env.WEATHER
     const response = await fetch(`https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lng}&key=${weatherAPI}&units=M`)
@@ -109,7 +123,9 @@ const getCurrentWeather = async (lat, lng) => {
     return forecast
 }
 
-//Get Image of provided place name
+/**
+* @description Calls the pixabay api and returns image of city
+*/
 const getImage = async (placeName, country) => {
 
     const pix = process.env.PIX
@@ -130,7 +146,9 @@ const getImage = async (placeName, country) => {
     }
 }
 
-// Checks if holiday is within week
+/**
+* @description Checks if date is within week.
+*/
 const isWithinWeek = (date) => {
     const now = new Date();
     let endOfWeek = new Date()
@@ -143,7 +161,9 @@ const isWithinWeek = (date) => {
     }
 }
 
-// Gets days until holiday
+/**
+* @description Gets days until holiday.
+*/
 const daysUntil = (date) => {
     const holidayDay = Math.ceil((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
     const now = new Date();
@@ -151,7 +171,9 @@ const daysUntil = (date) => {
     return holidayDay - currentDay
 }
 
-
+/**
+* @description For testing
+*/
 app.get('/test', async (req, res) => {
     res.json({ message: 'pass!' })
 })
