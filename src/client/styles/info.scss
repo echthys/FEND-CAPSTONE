@@ -1,0 +1,39 @@
+.info {
+    display: grid;
+    grid-template-areas: 
+    "heading"
+    "dataInput"
+    "button";
+    justify-content: center;
+}
+
+
+.info h2{
+    grid-area: heading;
+}
+
+.info button{
+    grid-area: button;
+    width: 30%;
+    background-color: green;
+    color: honeydew;
+    justify-self: center;
+    margin: 2%;
+}
+
+.dataInput {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    grid-area: dataInput;
+}
+
+.dataInput input {
+    margin: 1%;
+}
+
+@media (max-width: 767.98px) { 
+    .dataInput {
+        flex-wrap: wrap;
+    }
+}
