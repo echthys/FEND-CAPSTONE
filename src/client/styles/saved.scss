@@ -1,0 +1,13 @@
+#saved {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+@media (max-width: 767.98px) { 
+    #details {
+        flex-wrap: wrap;
+    }
+}

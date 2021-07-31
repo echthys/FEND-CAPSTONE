@@ -57,15 +57,16 @@ app.post('/getData', async (req, res) => {
 });
 
 
-// app.post("/postTest", async (req, res) => {
-//     console.log(req.body.city)
-// })
+postData = {}
 
-// designates what port the app will listen to for incoming requests
-// app.listen(8080, function () {
-//     console.log('Server Listening on port 8080')
-// })
+app.post("/saveTrip", (req, res) => {
+    postData = req.body
+})
 
+
+app.get('/getSavedTrip', (req, res) => {
+    res.send(JSON.stringify(postData))
+})
 
 // Geo Name for api call
 const geo = process.env.GEONAME;
