@@ -1,3 +1,7 @@
+/**
+* @description Sets min date on index date input
+*/
+
 function setDate() {
     const dateControl = document.querySelector('input[type="date"]');
     const date = new Date();

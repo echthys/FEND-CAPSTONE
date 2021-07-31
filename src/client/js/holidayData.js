@@ -1,3 +1,7 @@
+/**
+* @description Gets Holiday Data from Index page.
+*/
+
 function getHolidayData() {
     const city = document.getElementById("city").value
     const country = document.getElementById("country").value

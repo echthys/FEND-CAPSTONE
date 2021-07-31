@@ -1,3 +1,7 @@
+/**
+* @description Gets Saved Holiday from Express Server
+*/
+
 async function getSavedHoliday() {
     const response = await fetch("http://localhost:8080/getSavedTrip")
     const details = await response.json()

@@ -6,9 +6,8 @@ const supertest = require('supertest')
 const request = supertest(app)
 
 
-describe('Test Endpoint Response 1', () => {
+describe('Testing / response', () => {
     test('Obtain 200 server response from call', async () => {
-
         const response = await request.get('/');
         expect(response.status).toBe(200);
     })

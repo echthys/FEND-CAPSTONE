@@ -1,3 +1,9 @@
+/**
+* @description Appends response data to page for multiple days
+* @constructor
+* @param response - contains response data to update display
+*/
+
 function updateMultipleDays(response) {
     const results = document.getElementById("results")
     const heading = document.createElement("h2")

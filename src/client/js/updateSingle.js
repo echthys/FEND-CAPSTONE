@@ -1,5 +1,11 @@
 import { directive } from "@babel/types"
 
+/**
+* @description Appends response data to page for single day
+* @constructor
+* @param response - contains response data to update display
+*/
+
 function updateSingleDay(temp, description, until) {
 
     const results = document.getElementById("results")

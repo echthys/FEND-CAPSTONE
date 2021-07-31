@@ -1,5 +1,9 @@
 import { postReq } from './post'
 
+/**
+* @description Saves the holiday data to server
+*/
+
 async function saveHoliday() {
     const city = document.getElementById("city").value
     const country = document.getElementById("country").value
