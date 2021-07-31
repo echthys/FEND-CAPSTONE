@@ -35,7 +35,7 @@ function updateMultipleDays(response) {
 
     const daysUntil = document.createElement("p")
     daysUntil.setAttribute("id", "days")
-    daysUntil.innerText = `Days Until: ${response.until}`
+    daysUntil.innerText = `Days Until ${location}: ${response.until}`
     results.appendChild(daysUntil)
 
 }

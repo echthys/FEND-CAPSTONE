@@ -22,7 +22,7 @@ function updateSingleDay(temp, description, until) {
 
     dayTemp.innerText = `Current Temp: ${temp}`
     dayDesc.innerText = `Description: ${description}`
-    daysUnitl.innerText = `Days unitl: ${until}`
+    daysUnitl.innerText = `Days unitl ${location}: ${until}`
 
     details.appendChild(dayTemp)
     details.appendChild(dayDesc)
