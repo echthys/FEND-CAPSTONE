@@ -60,7 +60,7 @@ app.post('/getData', async (req, res) => {
 });
 
 // For stroring data
-postData = {}
+let postData = {}
 
 /**
 * @description Dsve trip data
