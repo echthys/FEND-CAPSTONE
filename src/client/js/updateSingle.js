@@ -21,18 +21,18 @@ function updateSingleDay(temp, description, until) {
 
     const details = document.getElementById("details")
 
-    const daysUnitl = document.createElement("p")
+    const daysUntil = document.createElement("p")
     const dayTemp = document.createElement("p")
     const dayDesc = document.createElement("p")
 
 
-    dayTemp.innerText = `Current Temp: ${temp}`
+    dayTemp.innerText = `Current Temp: ${temp}°C`
     dayDesc.innerText = `Description: ${description}`
-    daysUnitl.innerText = `Days unitl ${location}: ${until}`
+    daysUntil.innerText = `Days unitl ${location}: ${until}`
 
     details.appendChild(dayTemp)
     details.appendChild(dayDesc)
-    details.appendChild(daysUnitl)
+    details.appendChild(daysUntil)
 }
 
 

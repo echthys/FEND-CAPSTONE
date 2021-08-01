@@ -31,7 +31,7 @@ function updateMultipleDays(response) {
 
         const day = document.getElementById(value.date)
         dayDate.innerText = `Date: ${value.date}`
-        dayTemp.innerText = `Temperature: ${value.temp}`
+        dayTemp.innerText = `Temperature: ${value.temp}°C`
         dayDesc.innerText = `Description: ${value.description}`
 
         day.appendChild(dayDate)
